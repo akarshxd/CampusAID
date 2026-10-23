@@ -1,0 +1,60 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RequestStatus {
+  REQUESTED
+  ACCEPTED
+  IN_PROGRESS
+  HANDOVER
+  COMPLETED
+  CANCELLED
+  EXPIRED
+  DISPUTED
+  FAILED
+}
+
+model Campus {
+  id          String        @id @default(uuid())
+  name        String
+  emailDomain String        @unique
+  createdAt   DateTime      @default(now())
+  users       User[]
+  requests    HelpRequest[]
+}
+
+model User {
+  id           String        @id @default(uuid())
+  email        String        @unique
+  passwordHash String
+  name         String
+  campusId     String
+  campus       Campus        @relation(fields: [campusId], references: [id])
+  createdAt    DateTime      @default(now())
+  requests     HelpRequest[]
+}
+
+model HelpRequest {
+  id          String        @id @default(uuid())
+  title       String
+  description String?
+  pickup      String
+  dropoff     String
+  reward      Int
+  neededBy    DateTime?
+  status      RequestStatus @default(REQUESTED)
+  requesterId String
+  requester   User          @relation(fields: [requesterId], references: [id])
+  campusId    String
+  campus      Campus        @relation(fields: [campusId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([campusId, status])
+}

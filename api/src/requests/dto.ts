@@ -1,6 +1,8 @@
 import {
   IsDateString,
   IsInt,
+  IsLatitude,
+  IsLongitude,
   IsOptional,
   IsString,
   Max,
@@ -20,6 +22,14 @@ export class CreateRequestDto {
   @IsString()
   @MinLength(2)
   pickup: string;
+
+  @IsOptional()
+  @IsLatitude()
+  pickupLat?: number;
+
+  @IsOptional()
+  @IsLongitude()
+  pickupLng?: number;
 
   @IsString()
   @MinLength(2)

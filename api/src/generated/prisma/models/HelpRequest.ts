@@ -27,10 +27,14 @@ export type AggregateHelpRequest = {
 }
 
 export type HelpRequestAvgAggregateOutputType = {
+  pickupLat: number | null
+  pickupLng: number | null
   reward: number | null
 }
 
 export type HelpRequestSumAggregateOutputType = {
+  pickupLat: number | null
+  pickupLng: number | null
   reward: number | null
 }
 
@@ -39,11 +43,15 @@ export type HelpRequestMinAggregateOutputType = {
   title: string | null
   description: string | null
   pickup: string | null
+  pickupLat: number | null
+  pickupLng: number | null
   dropoff: string | null
   reward: number | null
   neededBy: Date | null
   status: $Enums.RequestStatus | null
   requesterId: string | null
+  helperId: string | null
+  acceptedAt: Date | null
   campusId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,11 +62,15 @@ export type HelpRequestMaxAggregateOutputType = {
   title: string | null
   description: string | null
   pickup: string | null
+  pickupLat: number | null
+  pickupLng: number | null
   dropoff: string | null
   reward: number | null
   neededBy: Date | null
   status: $Enums.RequestStatus | null
   requesterId: string | null
+  helperId: string | null
+  acceptedAt: Date | null
   campusId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -69,11 +81,15 @@ export type HelpRequestCountAggregateOutputType = {
   title: number
   description: number
   pickup: number
+  pickupLat: number
+  pickupLng: number
   dropoff: number
   reward: number
   neededBy: number
   status: number
   requesterId: number
+  helperId: number
+  acceptedAt: number
   campusId: number
   createdAt: number
   updatedAt: number
@@ -82,10 +98,14 @@ export type HelpRequestCountAggregateOutputType = {
 
 
 export type HelpRequestAvgAggregateInputType = {
+  pickupLat?: true
+  pickupLng?: true
   reward?: true
 }
 
 export type HelpRequestSumAggregateInputType = {
+  pickupLat?: true
+  pickupLng?: true
   reward?: true
 }
 
@@ -94,11 +114,15 @@ export type HelpRequestMinAggregateInputType = {
   title?: true
   description?: true
   pickup?: true
+  pickupLat?: true
+  pickupLng?: true
   dropoff?: true
   reward?: true
   neededBy?: true
   status?: true
   requesterId?: true
+  helperId?: true
+  acceptedAt?: true
   campusId?: true
   createdAt?: true
   updatedAt?: true
@@ -109,11 +133,15 @@ export type HelpRequestMaxAggregateInputType = {
   title?: true
   description?: true
   pickup?: true
+  pickupLat?: true
+  pickupLng?: true
   dropoff?: true
   reward?: true
   neededBy?: true
   status?: true
   requesterId?: true
+  helperId?: true
+  acceptedAt?: true
   campusId?: true
   createdAt?: true
   updatedAt?: true
@@ -124,11 +152,15 @@ export type HelpRequestCountAggregateInputType = {
   title?: true
   description?: true
   pickup?: true
+  pickupLat?: true
+  pickupLng?: true
   dropoff?: true
   reward?: true
   neededBy?: true
   status?: true
   requesterId?: true
+  helperId?: true
+  acceptedAt?: true
   campusId?: true
   createdAt?: true
   updatedAt?: true
@@ -226,11 +258,15 @@ export type HelpRequestGroupByOutputType = {
   title: string
   description: string | null
   pickup: string
+  pickupLat: number | null
+  pickupLng: number | null
   dropoff: string
   reward: number
   neededBy: Date | null
   status: $Enums.RequestStatus
   requesterId: string
+  helperId: string | null
+  acceptedAt: Date | null
   campusId: string
   createdAt: Date
   updatedAt: Date
@@ -264,15 +300,20 @@ export type HelpRequestWhereInput = {
   title?: Prisma.StringFilter<"HelpRequest"> | string
   description?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   pickup?: Prisma.StringFilter<"HelpRequest"> | string
+  pickupLat?: Prisma.FloatNullableFilter<"HelpRequest"> | number | null
+  pickupLng?: Prisma.FloatNullableFilter<"HelpRequest"> | number | null
   dropoff?: Prisma.StringFilter<"HelpRequest"> | string
   reward?: Prisma.IntFilter<"HelpRequest"> | number
   neededBy?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
   status?: Prisma.EnumRequestStatusFilter<"HelpRequest"> | $Enums.RequestStatus
   requesterId?: Prisma.StringFilter<"HelpRequest"> | string
+  helperId?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
+  acceptedAt?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
   campusId?: Prisma.StringFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  helper?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   campus?: Prisma.XOR<Prisma.CampusScalarRelationFilter, Prisma.CampusWhereInput>
 }
 
@@ -281,15 +322,20 @@ export type HelpRequestOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   pickup?: Prisma.SortOrder
+  pickupLat?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickupLng?: Prisma.SortOrderInput | Prisma.SortOrder
   dropoff?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   neededBy?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
+  helperId?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   requester?: Prisma.UserOrderByWithRelationInput
+  helper?: Prisma.UserOrderByWithRelationInput
   campus?: Prisma.CampusOrderByWithRelationInput
 }
 
@@ -301,15 +347,20 @@ export type HelpRequestWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"HelpRequest"> | string
   description?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   pickup?: Prisma.StringFilter<"HelpRequest"> | string
+  pickupLat?: Prisma.FloatNullableFilter<"HelpRequest"> | number | null
+  pickupLng?: Prisma.FloatNullableFilter<"HelpRequest"> | number | null
   dropoff?: Prisma.StringFilter<"HelpRequest"> | string
   reward?: Prisma.IntFilter<"HelpRequest"> | number
   neededBy?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
   status?: Prisma.EnumRequestStatusFilter<"HelpRequest"> | $Enums.RequestStatus
   requesterId?: Prisma.StringFilter<"HelpRequest"> | string
+  helperId?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
+  acceptedAt?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
   campusId?: Prisma.StringFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  helper?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   campus?: Prisma.XOR<Prisma.CampusScalarRelationFilter, Prisma.CampusWhereInput>
 }, "id">
 
@@ -318,11 +369,15 @@ export type HelpRequestOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   pickup?: Prisma.SortOrder
+  pickupLat?: Prisma.SortOrderInput | Prisma.SortOrder
+  pickupLng?: Prisma.SortOrderInput | Prisma.SortOrder
   dropoff?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   neededBy?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
+  helperId?: Prisma.SortOrderInput | Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -341,11 +396,15 @@ export type HelpRequestScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"HelpRequest"> | string | null
   pickup?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
+  pickupLat?: Prisma.FloatNullableWithAggregatesFilter<"HelpRequest"> | number | null
+  pickupLng?: Prisma.FloatNullableWithAggregatesFilter<"HelpRequest"> | number | null
   dropoff?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
   reward?: Prisma.IntWithAggregatesFilter<"HelpRequest"> | number
   neededBy?: Prisma.DateTimeNullableWithAggregatesFilter<"HelpRequest"> | Date | string | null
   status?: Prisma.EnumRequestStatusWithAggregatesFilter<"HelpRequest"> | $Enums.RequestStatus
   requesterId?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
+  helperId?: Prisma.StringNullableWithAggregatesFilter<"HelpRequest"> | string | null
+  acceptedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HelpRequest"> | Date | string | null
   campusId?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HelpRequest"> | Date | string
@@ -356,13 +415,17 @@ export type HelpRequestCreateInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
+  acceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
+  helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
   campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
 }
 
@@ -371,11 +434,15 @@ export type HelpRequestUncheckedCreateInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   requesterId: string
+  helperId?: string | null
+  acceptedAt?: Date | string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -386,13 +453,17 @@ export type HelpRequestUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
+  helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
   campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
 }
 
@@ -401,11 +472,15 @@ export type HelpRequestUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,11 +491,15 @@ export type HelpRequestCreateManyInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   requesterId: string
+  helperId?: string | null
+  acceptedAt?: Date | string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -431,10 +510,13 @@ export type HelpRequestUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -444,11 +526,15 @@ export type HelpRequestUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -469,17 +555,23 @@ export type HelpRequestCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   pickup?: Prisma.SortOrder
+  pickupLat?: Prisma.SortOrder
+  pickupLng?: Prisma.SortOrder
   dropoff?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   neededBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
+  helperId?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type HelpRequestAvgOrderByAggregateInput = {
+  pickupLat?: Prisma.SortOrder
+  pickupLng?: Prisma.SortOrder
   reward?: Prisma.SortOrder
 }
 
@@ -488,11 +580,15 @@ export type HelpRequestMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   pickup?: Prisma.SortOrder
+  pickupLat?: Prisma.SortOrder
+  pickupLng?: Prisma.SortOrder
   dropoff?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   neededBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
+  helperId?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -503,17 +599,23 @@ export type HelpRequestMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   pickup?: Prisma.SortOrder
+  pickupLat?: Prisma.SortOrder
+  pickupLng?: Prisma.SortOrder
   dropoff?: Prisma.SortOrder
   reward?: Prisma.SortOrder
   neededBy?: Prisma.SortOrder
   status?: Prisma.SortOrder
   requesterId?: Prisma.SortOrder
+  helperId?: Prisma.SortOrder
+  acceptedAt?: Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type HelpRequestSumOrderByAggregateInput = {
+  pickupLat?: Prisma.SortOrder
+  pickupLng?: Prisma.SortOrder
   reward?: Prisma.SortOrder
 }
 
@@ -566,10 +668,24 @@ export type HelpRequestCreateNestedManyWithoutRequesterInput = {
   connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
 }
 
+export type HelpRequestCreateNestedManyWithoutHelperInput = {
+  create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutHelperInput, Prisma.HelpRequestUncheckedCreateWithoutHelperInput> | Prisma.HelpRequestCreateWithoutHelperInput[] | Prisma.HelpRequestUncheckedCreateWithoutHelperInput[]
+  connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutHelperInput | Prisma.HelpRequestCreateOrConnectWithoutHelperInput[]
+  createMany?: Prisma.HelpRequestCreateManyHelperInputEnvelope
+  connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+}
+
 export type HelpRequestUncheckedCreateNestedManyWithoutRequesterInput = {
   create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutRequesterInput, Prisma.HelpRequestUncheckedCreateWithoutRequesterInput> | Prisma.HelpRequestCreateWithoutRequesterInput[] | Prisma.HelpRequestUncheckedCreateWithoutRequesterInput[]
   connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutRequesterInput | Prisma.HelpRequestCreateOrConnectWithoutRequesterInput[]
   createMany?: Prisma.HelpRequestCreateManyRequesterInputEnvelope
+  connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+}
+
+export type HelpRequestUncheckedCreateNestedManyWithoutHelperInput = {
+  create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutHelperInput, Prisma.HelpRequestUncheckedCreateWithoutHelperInput> | Prisma.HelpRequestCreateWithoutHelperInput[] | Prisma.HelpRequestUncheckedCreateWithoutHelperInput[]
+  connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutHelperInput | Prisma.HelpRequestCreateOrConnectWithoutHelperInput[]
+  createMany?: Prisma.HelpRequestCreateManyHelperInputEnvelope
   connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
 }
 
@@ -587,6 +703,20 @@ export type HelpRequestUpdateManyWithoutRequesterNestedInput = {
   deleteMany?: Prisma.HelpRequestScalarWhereInput | Prisma.HelpRequestScalarWhereInput[]
 }
 
+export type HelpRequestUpdateManyWithoutHelperNestedInput = {
+  create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutHelperInput, Prisma.HelpRequestUncheckedCreateWithoutHelperInput> | Prisma.HelpRequestCreateWithoutHelperInput[] | Prisma.HelpRequestUncheckedCreateWithoutHelperInput[]
+  connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutHelperInput | Prisma.HelpRequestCreateOrConnectWithoutHelperInput[]
+  upsert?: Prisma.HelpRequestUpsertWithWhereUniqueWithoutHelperInput | Prisma.HelpRequestUpsertWithWhereUniqueWithoutHelperInput[]
+  createMany?: Prisma.HelpRequestCreateManyHelperInputEnvelope
+  set?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  disconnect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  delete?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  update?: Prisma.HelpRequestUpdateWithWhereUniqueWithoutHelperInput | Prisma.HelpRequestUpdateWithWhereUniqueWithoutHelperInput[]
+  updateMany?: Prisma.HelpRequestUpdateManyWithWhereWithoutHelperInput | Prisma.HelpRequestUpdateManyWithWhereWithoutHelperInput[]
+  deleteMany?: Prisma.HelpRequestScalarWhereInput | Prisma.HelpRequestScalarWhereInput[]
+}
+
 export type HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput = {
   create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutRequesterInput, Prisma.HelpRequestUncheckedCreateWithoutRequesterInput> | Prisma.HelpRequestCreateWithoutRequesterInput[] | Prisma.HelpRequestUncheckedCreateWithoutRequesterInput[]
   connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutRequesterInput | Prisma.HelpRequestCreateOrConnectWithoutRequesterInput[]
@@ -598,6 +728,20 @@ export type HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput = {
   connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
   update?: Prisma.HelpRequestUpdateWithWhereUniqueWithoutRequesterInput | Prisma.HelpRequestUpdateWithWhereUniqueWithoutRequesterInput[]
   updateMany?: Prisma.HelpRequestUpdateManyWithWhereWithoutRequesterInput | Prisma.HelpRequestUpdateManyWithWhereWithoutRequesterInput[]
+  deleteMany?: Prisma.HelpRequestScalarWhereInput | Prisma.HelpRequestScalarWhereInput[]
+}
+
+export type HelpRequestUncheckedUpdateManyWithoutHelperNestedInput = {
+  create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutHelperInput, Prisma.HelpRequestUncheckedCreateWithoutHelperInput> | Prisma.HelpRequestCreateWithoutHelperInput[] | Prisma.HelpRequestUncheckedCreateWithoutHelperInput[]
+  connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutHelperInput | Prisma.HelpRequestCreateOrConnectWithoutHelperInput[]
+  upsert?: Prisma.HelpRequestUpsertWithWhereUniqueWithoutHelperInput | Prisma.HelpRequestUpsertWithWhereUniqueWithoutHelperInput[]
+  createMany?: Prisma.HelpRequestCreateManyHelperInputEnvelope
+  set?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  disconnect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  delete?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  connect?: Prisma.HelpRequestWhereUniqueInput | Prisma.HelpRequestWhereUniqueInput[]
+  update?: Prisma.HelpRequestUpdateWithWhereUniqueWithoutHelperInput | Prisma.HelpRequestUpdateWithWhereUniqueWithoutHelperInput[]
+  updateMany?: Prisma.HelpRequestUpdateManyWithWhereWithoutHelperInput | Prisma.HelpRequestUpdateManyWithWhereWithoutHelperInput[]
   deleteMany?: Prisma.HelpRequestScalarWhereInput | Prisma.HelpRequestScalarWhereInput[]
 }
 
@@ -626,13 +770,17 @@ export type HelpRequestCreateWithoutCampusInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
+  acceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
+  helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
 }
 
 export type HelpRequestUncheckedCreateWithoutCampusInput = {
@@ -640,11 +788,15 @@ export type HelpRequestUncheckedCreateWithoutCampusInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   requesterId: string
+  helperId?: string | null
+  acceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -683,11 +835,15 @@ export type HelpRequestScalarWhereInput = {
   title?: Prisma.StringFilter<"HelpRequest"> | string
   description?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   pickup?: Prisma.StringFilter<"HelpRequest"> | string
+  pickupLat?: Prisma.FloatNullableFilter<"HelpRequest"> | number | null
+  pickupLng?: Prisma.FloatNullableFilter<"HelpRequest"> | number | null
   dropoff?: Prisma.StringFilter<"HelpRequest"> | string
   reward?: Prisma.IntFilter<"HelpRequest"> | number
   neededBy?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
   status?: Prisma.EnumRequestStatusFilter<"HelpRequest"> | $Enums.RequestStatus
   requesterId?: Prisma.StringFilter<"HelpRequest"> | string
+  helperId?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
+  acceptedAt?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
   campusId?: Prisma.StringFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
@@ -698,12 +854,16 @@ export type HelpRequestCreateWithoutRequesterInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
+  acceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
   campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
 }
 
@@ -712,10 +872,14 @@ export type HelpRequestUncheckedCreateWithoutRequesterInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
+  helperId?: string | null
+  acceptedAt?: Date | string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -728,6 +892,52 @@ export type HelpRequestCreateOrConnectWithoutRequesterInput = {
 
 export type HelpRequestCreateManyRequesterInputEnvelope = {
   data: Prisma.HelpRequestCreateManyRequesterInput | Prisma.HelpRequestCreateManyRequesterInput[]
+  skipDuplicates?: boolean
+}
+
+export type HelpRequestCreateWithoutHelperInput = {
+  id?: string
+  title: string
+  description?: string | null
+  pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
+  dropoff: string
+  reward: number
+  neededBy?: Date | string | null
+  status?: $Enums.RequestStatus
+  acceptedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutRequestsInput
+  campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
+}
+
+export type HelpRequestUncheckedCreateWithoutHelperInput = {
+  id?: string
+  title: string
+  description?: string | null
+  pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
+  dropoff: string
+  reward: number
+  neededBy?: Date | string | null
+  status?: $Enums.RequestStatus
+  requesterId: string
+  acceptedAt?: Date | string | null
+  campusId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type HelpRequestCreateOrConnectWithoutHelperInput = {
+  where: Prisma.HelpRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.HelpRequestCreateWithoutHelperInput, Prisma.HelpRequestUncheckedCreateWithoutHelperInput>
+}
+
+export type HelpRequestCreateManyHelperInputEnvelope = {
+  data: Prisma.HelpRequestCreateManyHelperInput | Prisma.HelpRequestCreateManyHelperInput[]
   skipDuplicates?: boolean
 }
 
@@ -747,16 +957,36 @@ export type HelpRequestUpdateManyWithWhereWithoutRequesterInput = {
   data: Prisma.XOR<Prisma.HelpRequestUpdateManyMutationInput, Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterInput>
 }
 
+export type HelpRequestUpsertWithWhereUniqueWithoutHelperInput = {
+  where: Prisma.HelpRequestWhereUniqueInput
+  update: Prisma.XOR<Prisma.HelpRequestUpdateWithoutHelperInput, Prisma.HelpRequestUncheckedUpdateWithoutHelperInput>
+  create: Prisma.XOR<Prisma.HelpRequestCreateWithoutHelperInput, Prisma.HelpRequestUncheckedCreateWithoutHelperInput>
+}
+
+export type HelpRequestUpdateWithWhereUniqueWithoutHelperInput = {
+  where: Prisma.HelpRequestWhereUniqueInput
+  data: Prisma.XOR<Prisma.HelpRequestUpdateWithoutHelperInput, Prisma.HelpRequestUncheckedUpdateWithoutHelperInput>
+}
+
+export type HelpRequestUpdateManyWithWhereWithoutHelperInput = {
+  where: Prisma.HelpRequestScalarWhereInput
+  data: Prisma.XOR<Prisma.HelpRequestUpdateManyMutationInput, Prisma.HelpRequestUncheckedUpdateManyWithoutHelperInput>
+}
+
 export type HelpRequestCreateManyCampusInput = {
   id?: string
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   requesterId: string
+  helperId?: string | null
+  acceptedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -766,13 +996,17 @@ export type HelpRequestUpdateWithoutCampusInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
+  helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
 }
 
 export type HelpRequestUncheckedUpdateWithoutCampusInput = {
@@ -780,11 +1014,15 @@ export type HelpRequestUncheckedUpdateWithoutCampusInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -794,11 +1032,15 @@ export type HelpRequestUncheckedUpdateManyWithoutCampusInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -808,10 +1050,32 @@ export type HelpRequestCreateManyRequesterInput = {
   title: string
   description?: string | null
   pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
   dropoff: string
   reward: number
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
+  helperId?: string | null
+  acceptedAt?: Date | string | null
+  campusId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type HelpRequestCreateManyHelperInput = {
+  id?: string
+  title: string
+  description?: string | null
+  pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
+  dropoff: string
+  reward: number
+  neededBy?: Date | string | null
+  status?: $Enums.RequestStatus
+  requesterId: string
+  acceptedAt?: Date | string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -822,12 +1086,16 @@ export type HelpRequestUpdateWithoutRequesterInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
   campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
 }
 
@@ -836,10 +1104,14 @@ export type HelpRequestUncheckedUpdateWithoutRequesterInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -850,10 +1122,68 @@ export type HelpRequestUncheckedUpdateManyWithoutRequesterInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   dropoff?: Prisma.StringFieldUpdateOperationsInput | string
   reward?: Prisma.IntFieldUpdateOperationsInput | number
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type HelpRequestUpdateWithoutHelperInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  dropoff?: Prisma.StringFieldUpdateOperationsInput | string
+  reward?: Prisma.IntFieldUpdateOperationsInput | number
+  neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
+  campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
+}
+
+export type HelpRequestUncheckedUpdateWithoutHelperInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  dropoff?: Prisma.StringFieldUpdateOperationsInput | string
+  reward?: Prisma.IntFieldUpdateOperationsInput | number
+  neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type HelpRequestUncheckedUpdateManyWithoutHelperInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  dropoff?: Prisma.StringFieldUpdateOperationsInput | string
+  reward?: Prisma.IntFieldUpdateOperationsInput | number
+  neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -866,15 +1196,20 @@ export type HelpRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   title?: boolean
   description?: boolean
   pickup?: boolean
+  pickupLat?: boolean
+  pickupLng?: boolean
   dropoff?: boolean
   reward?: boolean
   neededBy?: boolean
   status?: boolean
   requesterId?: boolean
+  helperId?: boolean
+  acceptedAt?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["helpRequest"]>
 
@@ -883,15 +1218,20 @@ export type HelpRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   title?: boolean
   description?: boolean
   pickup?: boolean
+  pickupLat?: boolean
+  pickupLng?: boolean
   dropoff?: boolean
   reward?: boolean
   neededBy?: boolean
   status?: boolean
   requesterId?: boolean
+  helperId?: boolean
+  acceptedAt?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["helpRequest"]>
 
@@ -900,15 +1240,20 @@ export type HelpRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   title?: boolean
   description?: boolean
   pickup?: boolean
+  pickupLat?: boolean
+  pickupLng?: boolean
   dropoff?: boolean
   reward?: boolean
   neededBy?: boolean
   status?: boolean
   requesterId?: boolean
+  helperId?: boolean
+  acceptedAt?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["helpRequest"]>
 
@@ -917,27 +1262,34 @@ export type HelpRequestSelectScalar = {
   title?: boolean
   description?: boolean
   pickup?: boolean
+  pickupLat?: boolean
+  pickupLng?: boolean
   dropoff?: boolean
   reward?: boolean
   neededBy?: boolean
   status?: boolean
   requesterId?: boolean
+  helperId?: boolean
+  acceptedAt?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type HelpRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "pickup" | "dropoff" | "reward" | "neededBy" | "status" | "requesterId" | "campusId" | "createdAt" | "updatedAt", ExtArgs["result"]["helpRequest"]>
+export type HelpRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "pickup" | "pickupLat" | "pickupLng" | "dropoff" | "reward" | "neededBy" | "status" | "requesterId" | "helperId" | "acceptedAt" | "campusId" | "createdAt" | "updatedAt", ExtArgs["result"]["helpRequest"]>
 export type HelpRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
 }
 export type HelpRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
 }
 export type HelpRequestIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
 }
 
@@ -945,6 +1297,7 @@ export type $HelpRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
   name: "HelpRequest"
   objects: {
     requester: Prisma.$UserPayload<ExtArgs>
+    helper: Prisma.$UserPayload<ExtArgs> | null
     campus: Prisma.$CampusPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -952,11 +1305,15 @@ export type $HelpRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
     title: string
     description: string | null
     pickup: string
+    pickupLat: number | null
+    pickupLng: number | null
     dropoff: string
     reward: number
     neededBy: Date | null
     status: $Enums.RequestStatus
     requesterId: string
+    helperId: string | null
+    acceptedAt: Date | null
     campusId: string
     createdAt: Date
     updatedAt: Date
@@ -1355,6 +1712,7 @@ readonly fields: HelpRequestFieldRefs;
 export interface Prisma__HelpRequestClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   requester<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  helper<T extends Prisma.HelpRequest$helperArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HelpRequest$helperArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   campus<T extends Prisma.CampusDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CampusDefaultArgs<ExtArgs>>): Prisma.Prisma__CampusClient<runtime.Types.Result.GetResult<Prisma.$CampusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1389,11 +1747,15 @@ export interface HelpRequestFieldRefs {
   readonly title: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly description: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly pickup: Prisma.FieldRef<"HelpRequest", 'String'>
+  readonly pickupLat: Prisma.FieldRef<"HelpRequest", 'Float'>
+  readonly pickupLng: Prisma.FieldRef<"HelpRequest", 'Float'>
   readonly dropoff: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly reward: Prisma.FieldRef<"HelpRequest", 'Int'>
   readonly neededBy: Prisma.FieldRef<"HelpRequest", 'DateTime'>
   readonly status: Prisma.FieldRef<"HelpRequest", 'RequestStatus'>
   readonly requesterId: Prisma.FieldRef<"HelpRequest", 'String'>
+  readonly helperId: Prisma.FieldRef<"HelpRequest", 'String'>
+  readonly acceptedAt: Prisma.FieldRef<"HelpRequest", 'DateTime'>
   readonly campusId: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly createdAt: Prisma.FieldRef<"HelpRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"HelpRequest", 'DateTime'>
@@ -1795,6 +2157,25 @@ export type HelpRequestDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many HelpRequests to delete.
    */
   limit?: number
+}
+
+/**
+ * HelpRequest.helper
+ */
+export type HelpRequest$helperArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

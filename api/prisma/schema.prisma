@@ -30,14 +30,25 @@ model Campus {
 }
 
 model User {
-  id           String        @id @default(uuid())
-  email        String        @unique
-  passwordHash String
-  name         String
-  campusId     String
-  campus       Campus        @relation(fields: [campusId], references: [id])
-  createdAt    DateTime      @default(now())
-  requests     HelpRequest[]
+  id             String        @id @default(uuid())
+  email          String        @unique
+  passwordHash   String
+  name           String
+  campusId       String
+  campus         Campus        @relation(fields: [campusId], references: [id])
+  createdAt      DateTime      @default(now())
+  requests       HelpRequest[] @relation("Requester")
+  helpedRequests HelpRequest[] @relation("Helper")
+  availability   Availability?
+}
+
+model Availability {
+  userId      String   @id
+  user        User     @relation(fields: [userId], references: [id])
+  isAvailable Boolean  @default(false)
+  lat         Float?
+  lng         Float?
+  updatedAt   DateTime @updatedAt
 }
 
 model HelpRequest {
@@ -45,12 +56,17 @@ model HelpRequest {
   title       String
   description String?
   pickup      String
+  pickupLat   Float?
+  pickupLng   Float?
   dropoff     String
   reward      Int
   neededBy    DateTime?
   status      RequestStatus @default(REQUESTED)
   requesterId String
-  requester   User          @relation(fields: [requesterId], references: [id])
+  requester   User          @relation("Requester", fields: [requesterId], references: [id])
+  helperId    String?
+  helper      User?         @relation("Helper", fields: [helperId], references: [id])
+  acceptedAt  DateTime?
   campusId    String
   campus      Campus        @relation(fields: [campusId], references: [id])
   createdAt   DateTime      @default(now())

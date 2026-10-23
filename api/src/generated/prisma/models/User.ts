@@ -192,6 +192,8 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   campus?: Prisma.XOR<Prisma.CampusScalarRelationFilter, Prisma.CampusWhereInput>
   requests?: Prisma.HelpRequestListRelationFilter
+  helpedRequests?: Prisma.HelpRequestListRelationFilter
+  availability?: Prisma.XOR<Prisma.AvailabilityNullableScalarRelationFilter, Prisma.AvailabilityWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -203,6 +205,8 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   campus?: Prisma.CampusOrderByWithRelationInput
   requests?: Prisma.HelpRequestOrderByRelationAggregateInput
+  helpedRequests?: Prisma.HelpRequestOrderByRelationAggregateInput
+  availability?: Prisma.AvailabilityOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -217,6 +221,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   campus?: Prisma.XOR<Prisma.CampusScalarRelationFilter, Prisma.CampusWhereInput>
   requests?: Prisma.HelpRequestListRelationFilter
+  helpedRequests?: Prisma.HelpRequestListRelationFilter
+  availability?: Prisma.XOR<Prisma.AvailabilityNullableScalarRelationFilter, Prisma.AvailabilityWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -251,6 +257,8 @@ export type UserCreateInput = {
   createdAt?: Date | string
   campus: Prisma.CampusCreateNestedOneWithoutUsersInput
   requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -261,6 +269,8 @@ export type UserUncheckedCreateInput = {
   campusId: string
   createdAt?: Date | string
   requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -271,6 +281,8 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
   requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -281,6 +293,8 @@ export type UserUncheckedUpdateInput = {
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -351,6 +365,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type UserCreateNestedManyWithoutCampusInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutCampusInput, Prisma.UserUncheckedCreateWithoutCampusInput> | Prisma.UserCreateWithoutCampusInput[] | Prisma.UserUncheckedCreateWithoutCampusInput[]
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutCampusInput | Prisma.UserCreateOrConnectWithoutCampusInput[]
@@ -393,9 +412,29 @@ export type UserUncheckedUpdateManyWithoutCampusNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
+export type UserCreateNestedOneWithoutAvailabilityInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityInput, Prisma.UserUncheckedCreateWithoutAvailabilityInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAvailabilityInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAvailabilityNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityInput, Prisma.UserUncheckedCreateWithoutAvailabilityInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAvailabilityInput
+  upsert?: Prisma.UserUpsertWithoutAvailabilityInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAvailabilityInput, Prisma.UserUpdateWithoutAvailabilityInput>, Prisma.UserUncheckedUpdateWithoutAvailabilityInput>
+}
+
 export type UserCreateNestedOneWithoutRequestsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutRequestsInput, Prisma.UserUncheckedCreateWithoutRequestsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutHelpedRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHelpedRequestsInput, Prisma.UserUncheckedCreateWithoutHelpedRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHelpedRequestsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
@@ -407,6 +446,16 @@ export type UserUpdateOneRequiredWithoutRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRequestsInput, Prisma.UserUpdateWithoutRequestsInput>, Prisma.UserUncheckedUpdateWithoutRequestsInput>
 }
 
+export type UserUpdateOneWithoutHelpedRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutHelpedRequestsInput, Prisma.UserUncheckedCreateWithoutHelpedRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutHelpedRequestsInput
+  upsert?: Prisma.UserUpsertWithoutHelpedRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHelpedRequestsInput, Prisma.UserUpdateWithoutHelpedRequestsInput>, Prisma.UserUncheckedUpdateWithoutHelpedRequestsInput>
+}
+
 export type UserCreateWithoutCampusInput = {
   id?: string
   email: string
@@ -414,6 +463,8 @@ export type UserCreateWithoutCampusInput = {
   name: string
   createdAt?: Date | string
   requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCampusInput = {
@@ -423,6 +474,8 @@ export type UserUncheckedCreateWithoutCampusInput = {
   name: string
   createdAt?: Date | string
   requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCampusInput = {
@@ -463,6 +516,66 @@ export type UserScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
 }
 
+export type UserCreateWithoutAvailabilityInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  createdAt?: Date | string
+  campus: Prisma.CampusCreateNestedOneWithoutUsersInput
+  requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+}
+
+export type UserUncheckedCreateWithoutAvailabilityInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  campusId: string
+  createdAt?: Date | string
+  requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+}
+
+export type UserCreateOrConnectWithoutAvailabilityInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityInput, Prisma.UserUncheckedCreateWithoutAvailabilityInput>
+}
+
+export type UserUpsertWithoutAvailabilityInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAvailabilityInput, Prisma.UserUncheckedUpdateWithoutAvailabilityInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAvailabilityInput, Prisma.UserUncheckedCreateWithoutAvailabilityInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAvailabilityInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAvailabilityInput, Prisma.UserUncheckedUpdateWithoutAvailabilityInput>
+}
+
+export type UserUpdateWithoutAvailabilityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
+  requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAvailabilityInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+}
+
 export type UserCreateWithoutRequestsInput = {
   id?: string
   email: string
@@ -470,6 +583,8 @@ export type UserCreateWithoutRequestsInput = {
   name: string
   createdAt?: Date | string
   campus: Prisma.CampusCreateNestedOneWithoutUsersInput
+  helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRequestsInput = {
@@ -479,11 +594,40 @@ export type UserUncheckedCreateWithoutRequestsInput = {
   name: string
   campusId: string
   createdAt?: Date | string
+  helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRequestsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutRequestsInput, Prisma.UserUncheckedCreateWithoutRequestsInput>
+}
+
+export type UserCreateWithoutHelpedRequestsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  createdAt?: Date | string
+  campus: Prisma.CampusCreateNestedOneWithoutUsersInput
+  requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
+  availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutHelpedRequestsInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  campusId: string
+  createdAt?: Date | string
+  requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
+  availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutHelpedRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutHelpedRequestsInput, Prisma.UserUncheckedCreateWithoutHelpedRequestsInput>
 }
 
 export type UserUpsertWithoutRequestsInput = {
@@ -504,6 +648,8 @@ export type UserUpdateWithoutRequestsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
+  helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestsInput = {
@@ -513,6 +659,41 @@ export type UserUncheckedUpdateWithoutRequestsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserUpsertWithoutHelpedRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutHelpedRequestsInput, Prisma.UserUncheckedUpdateWithoutHelpedRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutHelpedRequestsInput, Prisma.UserUncheckedCreateWithoutHelpedRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutHelpedRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutHelpedRequestsInput, Prisma.UserUncheckedUpdateWithoutHelpedRequestsInput>
+}
+
+export type UserUpdateWithoutHelpedRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
+  requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
+  availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutHelpedRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyCampusInput = {
@@ -530,6 +711,8 @@ export type UserUpdateWithoutCampusInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCampusInput = {
@@ -539,6 +722,8 @@ export type UserUncheckedUpdateWithoutCampusInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCampusInput = {
@@ -556,10 +741,12 @@ export type UserUncheckedUpdateManyWithoutCampusInput = {
 
 export type UserCountOutputType = {
   requests: number
+  helpedRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requests?: boolean | UserCountOutputTypeCountRequestsArgs
+  helpedRequests?: boolean | UserCountOutputTypeCountHelpedRequestsArgs
 }
 
 /**
@@ -579,6 +766,13 @@ export type UserCountOutputTypeCountRequestsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.HelpRequestWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountHelpedRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HelpRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -589,6 +783,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
   requests?: boolean | Prisma.User$requestsArgs<ExtArgs>
+  helpedRequests?: boolean | Prisma.User$helpedRequestsArgs<ExtArgs>
+  availability?: boolean | Prisma.User$availabilityArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -625,6 +821,8 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
   requests?: boolean | Prisma.User$requestsArgs<ExtArgs>
+  helpedRequests?: boolean | Prisma.User$helpedRequestsArgs<ExtArgs>
+  availability?: boolean | Prisma.User$availabilityArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -639,6 +837,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     campus: Prisma.$CampusPayload<ExtArgs>
     requests: Prisma.$HelpRequestPayload<ExtArgs>[]
+    helpedRequests: Prisma.$HelpRequestPayload<ExtArgs>[]
+    availability: Prisma.$AvailabilityPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1043,6 +1243,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   campus<T extends Prisma.CampusDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CampusDefaultArgs<ExtArgs>>): Prisma.Prisma__CampusClient<runtime.Types.Result.GetResult<Prisma.$CampusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   requests<T extends Prisma.User$requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HelpRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  helpedRequests<T extends Prisma.User$helpedRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$helpedRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HelpRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  availability<T extends Prisma.User$availabilityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$availabilityArgs<ExtArgs>>): Prisma.Prisma__AvailabilityClient<runtime.Types.Result.GetResult<Prisma.$AvailabilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1500,6 +1702,49 @@ export type User$requestsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.HelpRequestScalarFieldEnum | Prisma.HelpRequestScalarFieldEnum[]
+}
+
+/**
+ * User.helpedRequests
+ */
+export type User$helpedRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HelpRequest
+   */
+  select?: Prisma.HelpRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HelpRequest
+   */
+  omit?: Prisma.HelpRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HelpRequestInclude<ExtArgs> | null
+  where?: Prisma.HelpRequestWhereInput
+  orderBy?: Prisma.HelpRequestOrderByWithRelationInput | Prisma.HelpRequestOrderByWithRelationInput[]
+  cursor?: Prisma.HelpRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HelpRequestScalarFieldEnum | Prisma.HelpRequestScalarFieldEnum[]
+}
+
+/**
+ * User.availability
+ */
+export type User$availabilityArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Availability
+   */
+  select?: Prisma.AvailabilitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Availability
+   */
+  omit?: Prisma.AvailabilityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AvailabilityInclude<ExtArgs> | null
+  where?: Prisma.AvailabilityWhereInput
 }
 
 /**

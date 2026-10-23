@@ -10,5 +10,6 @@
  */
 export type * from './models/Campus.js'
 export type * from './models/User.js'
+export type * from './models/Availability.js'
 export type * from './models/HelpRequest.js'
 export type * from './commonInputTypes.js'

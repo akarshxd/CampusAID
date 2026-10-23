@@ -50,6 +50,11 @@ export type Campus = Prisma.CampusModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Availability
+ * 
+ */
+export type Availability = Prisma.AvailabilityModel
+/**
  * Model HelpRequest
  * 
  */

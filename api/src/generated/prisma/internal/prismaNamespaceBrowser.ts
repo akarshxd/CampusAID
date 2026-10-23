@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Campus: 'Campus',
   User: 'User',
+  Availability: 'Availability',
   HelpRequest: 'HelpRequest'
 } as const
 
@@ -94,16 +95,31 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const AvailabilityScalarFieldEnum = {
+  userId: 'userId',
+  isAvailable: 'isAvailable',
+  lat: 'lat',
+  lng: 'lng',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AvailabilityScalarFieldEnum = (typeof AvailabilityScalarFieldEnum)[keyof typeof AvailabilityScalarFieldEnum]
+
+
 export const HelpRequestScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
   pickup: 'pickup',
+  pickupLat: 'pickupLat',
+  pickupLng: 'pickupLng',
   dropoff: 'dropoff',
   reward: 'reward',
   neededBy: 'neededBy',
   status: 'status',
   requesterId: 'requesterId',
+  helperId: 'helperId',
+  acceptedAt: 'acceptedAt',
   campusId: 'campusId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

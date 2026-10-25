@@ -52,6 +52,7 @@ export type HelpRequestMinAggregateOutputType = {
   requesterId: string | null
   helperId: string | null
   acceptedAt: Date | null
+  handoverCode: string | null
   campusId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -71,6 +72,7 @@ export type HelpRequestMaxAggregateOutputType = {
   requesterId: string | null
   helperId: string | null
   acceptedAt: Date | null
+  handoverCode: string | null
   campusId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -90,6 +92,7 @@ export type HelpRequestCountAggregateOutputType = {
   requesterId: number
   helperId: number
   acceptedAt: number
+  handoverCode: number
   campusId: number
   createdAt: number
   updatedAt: number
@@ -123,6 +126,7 @@ export type HelpRequestMinAggregateInputType = {
   requesterId?: true
   helperId?: true
   acceptedAt?: true
+  handoverCode?: true
   campusId?: true
   createdAt?: true
   updatedAt?: true
@@ -142,6 +146,7 @@ export type HelpRequestMaxAggregateInputType = {
   requesterId?: true
   helperId?: true
   acceptedAt?: true
+  handoverCode?: true
   campusId?: true
   createdAt?: true
   updatedAt?: true
@@ -161,6 +166,7 @@ export type HelpRequestCountAggregateInputType = {
   requesterId?: true
   helperId?: true
   acceptedAt?: true
+  handoverCode?: true
   campusId?: true
   createdAt?: true
   updatedAt?: true
@@ -267,6 +273,7 @@ export type HelpRequestGroupByOutputType = {
   requesterId: string
   helperId: string | null
   acceptedAt: Date | null
+  handoverCode: string | null
   campusId: string
   createdAt: Date
   updatedAt: Date
@@ -309,6 +316,7 @@ export type HelpRequestWhereInput = {
   requesterId?: Prisma.StringFilter<"HelpRequest"> | string
   helperId?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   acceptedAt?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
+  handoverCode?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   campusId?: Prisma.StringFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
@@ -331,6 +339,7 @@ export type HelpRequestOrderByWithRelationInput = {
   requesterId?: Prisma.SortOrder
   helperId?: Prisma.SortOrderInput | Prisma.SortOrder
   acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  handoverCode?: Prisma.SortOrderInput | Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -356,6 +365,7 @@ export type HelpRequestWhereUniqueInput = Prisma.AtLeast<{
   requesterId?: Prisma.StringFilter<"HelpRequest"> | string
   helperId?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   acceptedAt?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
+  handoverCode?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   campusId?: Prisma.StringFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
@@ -378,6 +388,7 @@ export type HelpRequestOrderByWithAggregationInput = {
   requesterId?: Prisma.SortOrder
   helperId?: Prisma.SortOrderInput | Prisma.SortOrder
   acceptedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  handoverCode?: Prisma.SortOrderInput | Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -405,6 +416,7 @@ export type HelpRequestScalarWhereWithAggregatesInput = {
   requesterId?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
   helperId?: Prisma.StringNullableWithAggregatesFilter<"HelpRequest"> | string | null
   acceptedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"HelpRequest"> | Date | string | null
+  handoverCode?: Prisma.StringNullableWithAggregatesFilter<"HelpRequest"> | string | null
   campusId?: Prisma.StringWithAggregatesFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"HelpRequest"> | Date | string
@@ -422,6 +434,7 @@ export type HelpRequestCreateInput = {
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
@@ -443,6 +456,7 @@ export type HelpRequestUncheckedCreateInput = {
   requesterId: string
   helperId?: string | null
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -460,6 +474,7 @@ export type HelpRequestUpdateInput = {
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
@@ -481,6 +496,7 @@ export type HelpRequestUncheckedUpdateInput = {
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -500,6 +516,7 @@ export type HelpRequestCreateManyInput = {
   requesterId: string
   helperId?: string | null
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -517,6 +534,7 @@ export type HelpRequestUpdateManyMutationInput = {
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -535,6 +553,7 @@ export type HelpRequestUncheckedUpdateManyInput = {
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -564,6 +583,7 @@ export type HelpRequestCountOrderByAggregateInput = {
   requesterId?: Prisma.SortOrder
   helperId?: Prisma.SortOrder
   acceptedAt?: Prisma.SortOrder
+  handoverCode?: Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -589,6 +609,7 @@ export type HelpRequestMaxOrderByAggregateInput = {
   requesterId?: Prisma.SortOrder
   helperId?: Prisma.SortOrder
   acceptedAt?: Prisma.SortOrder
+  handoverCode?: Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -608,6 +629,7 @@ export type HelpRequestMinOrderByAggregateInput = {
   requesterId?: Prisma.SortOrder
   helperId?: Prisma.SortOrder
   acceptedAt?: Prisma.SortOrder
+  handoverCode?: Prisma.SortOrder
   campusId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -777,6 +799,7 @@ export type HelpRequestCreateWithoutCampusInput = {
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
@@ -797,6 +820,7 @@ export type HelpRequestUncheckedCreateWithoutCampusInput = {
   requesterId: string
   helperId?: string | null
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -844,6 +868,7 @@ export type HelpRequestScalarWhereInput = {
   requesterId?: Prisma.StringFilter<"HelpRequest"> | string
   helperId?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   acceptedAt?: Prisma.DateTimeNullableFilter<"HelpRequest"> | Date | string | null
+  handoverCode?: Prisma.StringNullableFilter<"HelpRequest"> | string | null
   campusId?: Prisma.StringFilter<"HelpRequest"> | string
   createdAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"HelpRequest"> | Date | string
@@ -861,6 +886,7 @@ export type HelpRequestCreateWithoutRequesterInput = {
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
@@ -880,6 +906,7 @@ export type HelpRequestUncheckedCreateWithoutRequesterInput = {
   status?: $Enums.RequestStatus
   helperId?: string | null
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -907,6 +934,7 @@ export type HelpRequestCreateWithoutHelperInput = {
   neededBy?: Date | string | null
   status?: $Enums.RequestStatus
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
@@ -926,6 +954,7 @@ export type HelpRequestUncheckedCreateWithoutHelperInput = {
   status?: $Enums.RequestStatus
   requesterId: string
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -987,6 +1016,7 @@ export type HelpRequestCreateManyCampusInput = {
   requesterId: string
   helperId?: string | null
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1003,6 +1033,7 @@ export type HelpRequestUpdateWithoutCampusInput = {
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
@@ -1023,6 +1054,7 @@ export type HelpRequestUncheckedUpdateWithoutCampusInput = {
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1041,6 +1073,7 @@ export type HelpRequestUncheckedUpdateManyWithoutCampusInput = {
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1058,6 +1091,7 @@ export type HelpRequestCreateManyRequesterInput = {
   status?: $Enums.RequestStatus
   helperId?: string | null
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1076,6 +1110,7 @@ export type HelpRequestCreateManyHelperInput = {
   status?: $Enums.RequestStatus
   requesterId: string
   acceptedAt?: Date | string | null
+  handoverCode?: string | null
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1093,6 +1128,7 @@ export type HelpRequestUpdateWithoutRequesterInput = {
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
@@ -1112,6 +1148,7 @@ export type HelpRequestUncheckedUpdateWithoutRequesterInput = {
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1130,6 +1167,7 @@ export type HelpRequestUncheckedUpdateManyWithoutRequesterInput = {
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1147,6 +1185,7 @@ export type HelpRequestUpdateWithoutHelperInput = {
   neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
@@ -1166,6 +1205,7 @@ export type HelpRequestUncheckedUpdateWithoutHelperInput = {
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1184,6 +1224,7 @@ export type HelpRequestUncheckedUpdateManyWithoutHelperInput = {
   status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
   requesterId?: Prisma.StringFieldUpdateOperationsInput | string
   acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1205,6 +1246,7 @@ export type HelpRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   requesterId?: boolean
   helperId?: boolean
   acceptedAt?: boolean
+  handoverCode?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1227,6 +1269,7 @@ export type HelpRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   requesterId?: boolean
   helperId?: boolean
   acceptedAt?: boolean
+  handoverCode?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1249,6 +1292,7 @@ export type HelpRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   requesterId?: boolean
   helperId?: boolean
   acceptedAt?: boolean
+  handoverCode?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1271,12 +1315,13 @@ export type HelpRequestSelectScalar = {
   requesterId?: boolean
   helperId?: boolean
   acceptedAt?: boolean
+  handoverCode?: boolean
   campusId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type HelpRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "pickup" | "pickupLat" | "pickupLng" | "dropoff" | "reward" | "neededBy" | "status" | "requesterId" | "helperId" | "acceptedAt" | "campusId" | "createdAt" | "updatedAt", ExtArgs["result"]["helpRequest"]>
+export type HelpRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "pickup" | "pickupLat" | "pickupLng" | "dropoff" | "reward" | "neededBy" | "status" | "requesterId" | "helperId" | "acceptedAt" | "handoverCode" | "campusId" | "createdAt" | "updatedAt", ExtArgs["result"]["helpRequest"]>
 export type HelpRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
@@ -1314,6 +1359,7 @@ export type $HelpRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
     requesterId: string
     helperId: string | null
     acceptedAt: Date | null
+    handoverCode: string | null
     campusId: string
     createdAt: Date
     updatedAt: Date
@@ -1756,6 +1802,7 @@ export interface HelpRequestFieldRefs {
   readonly requesterId: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly helperId: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly acceptedAt: Prisma.FieldRef<"HelpRequest", 'DateTime'>
+  readonly handoverCode: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly campusId: Prisma.FieldRef<"HelpRequest", 'String'>
   readonly createdAt: Prisma.FieldRef<"HelpRequest", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"HelpRequest", 'DateTime'>

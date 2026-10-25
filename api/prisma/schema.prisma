@@ -67,6 +67,7 @@ model HelpRequest {
   helperId    String?
   helper      User?         @relation("Helper", fields: [helperId], references: [id])
   acceptedAt  DateTime?
+  handoverCode String?
   campusId    String
   campus      Campus        @relation(fields: [campusId], references: [id])
   createdAt   DateTime      @default(now())

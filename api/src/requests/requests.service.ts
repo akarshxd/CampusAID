@@ -4,6 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { randomInt } from 'crypto';
 import { EventsGateway } from '../events/events.gateway';
 import { PrismaService } from '../prisma.service';
 import { CreateRequestDto } from './dto';
@@ -78,11 +79,13 @@ export class RequestsService {
       where: { campusId, status: 'REQUESTED' },
       orderBy: { createdAt: 'desc' },
       include: { requester: { select: { id: true, name: true } } },
+      omit: { handoverCode: true },
     });
   }
 
   async accept(requestId: string, userId: string, campusId: string) {
     // One atomic step: only succeeds while the request is still REQUESTED.
+    // The 6-digit handover code is created in the same step.
     const result = await this.prisma.helpRequest.updateMany({
       where: {
         id: requestId,
@@ -94,6 +97,7 @@ export class RequestsService {
         status: 'ACCEPTED',
         helperId: userId,
         acceptedAt: new Date(),
+        handoverCode: String(randomInt(100000, 1000000)),
       },
     });
 
@@ -104,6 +108,7 @@ export class RequestsService {
           requester: { select: { id: true, name: true } },
           helper: { select: { id: true, name: true } },
         },
+        omit: { handoverCode: true },
       });
 
       this.events.emitToCampus(campusId, 'request:taken', {
@@ -124,5 +129,71 @@ export class RequestsService {
       throw new ForbiddenException('You cannot accept your own request');
     }
     throw new ConflictException('This request is no longer available');
+  }
+
+  async getHandoverCode(requestId: string, userId: string) {
+    const request = await this.prisma.helpRequest.findUnique({
+      where: { id: requestId },
+      select: { requesterId: true, handoverCode: true },
+    });
+    if (!request || request.requesterId !== userId) {
+      throw new NotFoundException('Request not found');
+    }
+    if (!request.handoverCode) {
+      throw new ConflictException(
+        'No handover code yet. A helper must accept first',
+      );
+    }
+    return { handoverCode: request.handoverCode };
+  }
+
+  async start(requestId: string, userId: string) {
+    const result = await this.prisma.helpRequest.updateMany({
+      where: { id: requestId, helperId: userId, status: 'ACCEPTED' },
+      data: { status: 'IN_PROGRESS' },
+    });
+    if (result.count === 1) {
+      return this.prisma.helpRequest.findUnique({
+        where: { id: requestId },
+        omit: { handoverCode: true },
+      });
+    }
+
+    const existing = await this.prisma.helpRequest.findUnique({
+      where: { id: requestId },
+    });
+    if (!existing || existing.helperId !== userId) {
+      throw new NotFoundException('Request not found');
+    }
+    throw new ConflictException('This task cannot be started right now');
+  }
+
+  async complete(requestId: string, userId: string, code: string) {
+    const result = await this.prisma.helpRequest.updateMany({
+      where: {
+        id: requestId,
+        helperId: userId,
+        status: 'IN_PROGRESS',
+        handoverCode: code,
+      },
+      data: { status: 'COMPLETED' },
+    });
+    if (result.count === 1) {
+      return this.prisma.helpRequest.findUnique({
+        where: { id: requestId },
+        omit: { handoverCode: true },
+      });
+    }
+
+    const existing = await this.prisma.helpRequest.findUnique({
+      where: { id: requestId },
+    });
+    if (!existing || existing.helperId !== userId) {
+      throw new NotFoundException('Request not found');
+    }
+    if (existing.status !== 'IN_PROGRESS') {
+      throw new ConflictException('This task is not in progress');
+    }
+    throw new ForbiddenException('Wrong handover code');
   }
 }

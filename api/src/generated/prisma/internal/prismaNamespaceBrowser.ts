@@ -120,6 +120,7 @@ export const HelpRequestScalarFieldEnum = {
   requesterId: 'requesterId',
   helperId: 'helperId',
   acceptedAt: 'acceptedAt',
+  handoverCode: 'handoverCode',
   campusId: 'campusId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

@@ -53,4 +53,14 @@ export class RequestsController {
     }
     return this.requests.complete(id, req.user.sub, code);
   }
+
+  @Post(':id/cancel')
+  cancel(@Req() req: any, @Param('id') id: string) {
+    return this.requests.cancel(id, req.user.sub);
+  }
+
+  @Post(':id/release')
+  release(@Req() req: any, @Param('id') id: string) {
+    return this.requests.release(id, req.user.sub);
+  }
 }

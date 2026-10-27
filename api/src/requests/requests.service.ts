@@ -196,4 +196,65 @@ export class RequestsService {
     }
     throw new ForbiddenException('Wrong handover code');
   }
+
+  async cancel(requestId: string, userId: string) {
+    const result = await this.prisma.helpRequest.updateMany({
+      where: { id: requestId, requesterId: userId, status: 'REQUESTED' },
+      data: { status: 'CANCELLED' },
+    });
+    if (result.count === 1) {
+      const cancelled = await this.prisma.helpRequest.findUnique({
+        where: { id: requestId },
+        omit: { handoverCode: true },
+      });
+      if (cancelled) {
+        this.events.emitToCampus(cancelled.campusId, 'request:cancelled', {
+          id: requestId,
+        });
+      }
+      return cancelled;
+    }
+
+    const existing = await this.prisma.helpRequest.findUnique({
+      where: { id: requestId },
+    });
+    if (!existing || existing.requesterId !== userId) {
+      throw new NotFoundException('Request not found');
+    }
+    throw new ConflictException(
+      'Only a request that nobody has accepted can be cancelled',
+    );
+  }
+
+  async release(requestId: string, userId: string) {
+    const result = await this.prisma.helpRequest.updateMany({
+      where: { id: requestId, helperId: userId, status: 'ACCEPTED' },
+      data: {
+        status: 'REQUESTED',
+        helperId: null,
+        acceptedAt: null,
+        handoverCode: null,
+      },
+    });
+    if (result.count === 1) {
+      const reopened = await this.prisma.helpRequest.findUnique({
+        where: { id: requestId },
+        include: { requester: { select: { id: true, name: true } } },
+        omit: { handoverCode: true },
+      });
+      if (reopened) {
+        this.events.emitToCampus(reopened.campusId, 'request:created', reopened);
+      }
+      return reopened;
+    }
+
+    const existing = await this.prisma.helpRequest.findUnique({
+      where: { id: requestId },
+    });
+    if (!existing || existing.helperId !== userId) {
+      throw new NotFoundException('Request not found');
+    }
+    throw new ConflictException('You can only back out before starting the task');
+  }
+
 }

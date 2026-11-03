@@ -194,6 +194,8 @@ export type UserWhereInput = {
   requests?: Prisma.HelpRequestListRelationFilter
   helpedRequests?: Prisma.HelpRequestListRelationFilter
   availability?: Prisma.XOR<Prisma.AvailabilityNullableScalarRelationFilter, Prisma.AvailabilityWhereInput> | null
+  ratingsGiven?: Prisma.RatingListRelationFilter
+  ratingsReceived?: Prisma.RatingListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -207,6 +209,8 @@ export type UserOrderByWithRelationInput = {
   requests?: Prisma.HelpRequestOrderByRelationAggregateInput
   helpedRequests?: Prisma.HelpRequestOrderByRelationAggregateInput
   availability?: Prisma.AvailabilityOrderByWithRelationInput
+  ratingsGiven?: Prisma.RatingOrderByRelationAggregateInput
+  ratingsReceived?: Prisma.RatingOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -223,6 +227,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   requests?: Prisma.HelpRequestListRelationFilter
   helpedRequests?: Prisma.HelpRequestListRelationFilter
   availability?: Prisma.XOR<Prisma.AvailabilityNullableScalarRelationFilter, Prisma.AvailabilityWhereInput> | null
+  ratingsGiven?: Prisma.RatingListRelationFilter
+  ratingsReceived?: Prisma.RatingListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -259,6 +265,8 @@ export type UserCreateInput = {
   requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
   helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
   availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingCreateNestedManyWithoutRateeInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -271,6 +279,8 @@ export type UserUncheckedCreateInput = {
   requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
   helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
   availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingUncheckedCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingUncheckedCreateNestedManyWithoutRateeInput
 }
 
 export type UserUpdateInput = {
@@ -283,6 +293,8 @@ export type UserUpdateInput = {
   requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
   helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
   availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -295,6 +307,8 @@ export type UserUncheckedUpdateInput = {
   requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
   helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
   availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUncheckedUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUncheckedUpdateManyWithoutRateeNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -456,6 +470,34 @@ export type UserUpdateOneWithoutHelpedRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutHelpedRequestsInput, Prisma.UserUpdateWithoutHelpedRequestsInput>, Prisma.UserUncheckedUpdateWithoutHelpedRequestsInput>
 }
 
+export type UserCreateNestedOneWithoutRatingsGivenInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRatingsGivenInput, Prisma.UserUncheckedCreateWithoutRatingsGivenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRatingsGivenInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutRatingsReceivedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRatingsReceivedInput, Prisma.UserUncheckedCreateWithoutRatingsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRatingsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRatingsGivenNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRatingsGivenInput, Prisma.UserUncheckedCreateWithoutRatingsGivenInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRatingsGivenInput
+  upsert?: Prisma.UserUpsertWithoutRatingsGivenInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRatingsGivenInput, Prisma.UserUpdateWithoutRatingsGivenInput>, Prisma.UserUncheckedUpdateWithoutRatingsGivenInput>
+}
+
+export type UserUpdateOneRequiredWithoutRatingsReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRatingsReceivedInput, Prisma.UserUncheckedCreateWithoutRatingsReceivedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRatingsReceivedInput
+  upsert?: Prisma.UserUpsertWithoutRatingsReceivedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRatingsReceivedInput, Prisma.UserUpdateWithoutRatingsReceivedInput>, Prisma.UserUncheckedUpdateWithoutRatingsReceivedInput>
+}
+
 export type UserCreateWithoutCampusInput = {
   id?: string
   email: string
@@ -465,6 +507,8 @@ export type UserCreateWithoutCampusInput = {
   requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
   helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
   availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingCreateNestedManyWithoutRateeInput
 }
 
 export type UserUncheckedCreateWithoutCampusInput = {
@@ -476,6 +520,8 @@ export type UserUncheckedCreateWithoutCampusInput = {
   requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
   helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
   availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingUncheckedCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingUncheckedCreateNestedManyWithoutRateeInput
 }
 
 export type UserCreateOrConnectWithoutCampusInput = {
@@ -525,6 +571,8 @@ export type UserCreateWithoutAvailabilityInput = {
   campus: Prisma.CampusCreateNestedOneWithoutUsersInput
   requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
   helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+  ratingsGiven?: Prisma.RatingCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingCreateNestedManyWithoutRateeInput
 }
 
 export type UserUncheckedCreateWithoutAvailabilityInput = {
@@ -536,6 +584,8 @@ export type UserUncheckedCreateWithoutAvailabilityInput = {
   createdAt?: Date | string
   requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
   helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+  ratingsGiven?: Prisma.RatingUncheckedCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingUncheckedCreateNestedManyWithoutRateeInput
 }
 
 export type UserCreateOrConnectWithoutAvailabilityInput = {
@@ -563,6 +613,8 @@ export type UserUpdateWithoutAvailabilityInput = {
   campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
   requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
   helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+  ratingsGiven?: Prisma.RatingUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAvailabilityInput = {
@@ -574,6 +626,8 @@ export type UserUncheckedUpdateWithoutAvailabilityInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
   helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+  ratingsGiven?: Prisma.RatingUncheckedUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUncheckedUpdateManyWithoutRateeNestedInput
 }
 
 export type UserCreateWithoutRequestsInput = {
@@ -585,6 +639,8 @@ export type UserCreateWithoutRequestsInput = {
   campus: Prisma.CampusCreateNestedOneWithoutUsersInput
   helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
   availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingCreateNestedManyWithoutRateeInput
 }
 
 export type UserUncheckedCreateWithoutRequestsInput = {
@@ -596,6 +652,8 @@ export type UserUncheckedCreateWithoutRequestsInput = {
   createdAt?: Date | string
   helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
   availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingUncheckedCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingUncheckedCreateNestedManyWithoutRateeInput
 }
 
 export type UserCreateOrConnectWithoutRequestsInput = {
@@ -612,6 +670,8 @@ export type UserCreateWithoutHelpedRequestsInput = {
   campus: Prisma.CampusCreateNestedOneWithoutUsersInput
   requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
   availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingCreateNestedManyWithoutRateeInput
 }
 
 export type UserUncheckedCreateWithoutHelpedRequestsInput = {
@@ -623,6 +683,8 @@ export type UserUncheckedCreateWithoutHelpedRequestsInput = {
   createdAt?: Date | string
   requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
   availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingUncheckedCreateNestedManyWithoutRaterInput
+  ratingsReceived?: Prisma.RatingUncheckedCreateNestedManyWithoutRateeInput
 }
 
 export type UserCreateOrConnectWithoutHelpedRequestsInput = {
@@ -650,6 +712,8 @@ export type UserUpdateWithoutRequestsInput = {
   campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
   helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
   availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRequestsInput = {
@@ -661,6 +725,8 @@ export type UserUncheckedUpdateWithoutRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
   availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUncheckedUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUncheckedUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUpsertWithoutHelpedRequestsInput = {
@@ -683,6 +749,8 @@ export type UserUpdateWithoutHelpedRequestsInput = {
   campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
   requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
   availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHelpedRequestsInput = {
@@ -694,6 +762,144 @@ export type UserUncheckedUpdateWithoutHelpedRequestsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
   availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUncheckedUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUncheckedUpdateManyWithoutRateeNestedInput
+}
+
+export type UserCreateWithoutRatingsGivenInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  createdAt?: Date | string
+  campus: Prisma.CampusCreateNestedOneWithoutUsersInput
+  requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+  ratingsReceived?: Prisma.RatingCreateNestedManyWithoutRateeInput
+}
+
+export type UserUncheckedCreateWithoutRatingsGivenInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  campusId: string
+  createdAt?: Date | string
+  requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+  ratingsReceived?: Prisma.RatingUncheckedCreateNestedManyWithoutRateeInput
+}
+
+export type UserCreateOrConnectWithoutRatingsGivenInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRatingsGivenInput, Prisma.UserUncheckedCreateWithoutRatingsGivenInput>
+}
+
+export type UserCreateWithoutRatingsReceivedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  createdAt?: Date | string
+  campus: Prisma.CampusCreateNestedOneWithoutUsersInput
+  requests?: Prisma.HelpRequestCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingCreateNestedManyWithoutRaterInput
+}
+
+export type UserUncheckedCreateWithoutRatingsReceivedInput = {
+  id?: string
+  email: string
+  passwordHash: string
+  name: string
+  campusId: string
+  createdAt?: Date | string
+  requests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutRequesterInput
+  helpedRequests?: Prisma.HelpRequestUncheckedCreateNestedManyWithoutHelperInput
+  availability?: Prisma.AvailabilityUncheckedCreateNestedOneWithoutUserInput
+  ratingsGiven?: Prisma.RatingUncheckedCreateNestedManyWithoutRaterInput
+}
+
+export type UserCreateOrConnectWithoutRatingsReceivedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRatingsReceivedInput, Prisma.UserUncheckedCreateWithoutRatingsReceivedInput>
+}
+
+export type UserUpsertWithoutRatingsGivenInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRatingsGivenInput, Prisma.UserUncheckedUpdateWithoutRatingsGivenInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRatingsGivenInput, Prisma.UserUncheckedCreateWithoutRatingsGivenInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRatingsGivenInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRatingsGivenInput, Prisma.UserUncheckedUpdateWithoutRatingsGivenInput>
+}
+
+export type UserUpdateWithoutRatingsGivenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
+  requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+  ratingsReceived?: Prisma.RatingUpdateManyWithoutRateeNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRatingsGivenInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+  ratingsReceived?: Prisma.RatingUncheckedUpdateManyWithoutRateeNestedInput
+}
+
+export type UserUpsertWithoutRatingsReceivedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRatingsReceivedInput, Prisma.UserUncheckedUpdateWithoutRatingsReceivedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRatingsReceivedInput, Prisma.UserUncheckedCreateWithoutRatingsReceivedInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRatingsReceivedInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRatingsReceivedInput, Prisma.UserUncheckedUpdateWithoutRatingsReceivedInput>
+}
+
+export type UserUpdateWithoutRatingsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  campus?: Prisma.CampusUpdateOneRequiredWithoutUsersNestedInput
+  requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUpdateManyWithoutRaterNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRatingsReceivedInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
+  availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUncheckedUpdateManyWithoutRaterNestedInput
 }
 
 export type UserCreateManyCampusInput = {
@@ -713,6 +919,8 @@ export type UserUpdateWithoutCampusInput = {
   requests?: Prisma.HelpRequestUpdateManyWithoutRequesterNestedInput
   helpedRequests?: Prisma.HelpRequestUpdateManyWithoutHelperNestedInput
   availability?: Prisma.AvailabilityUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCampusInput = {
@@ -724,6 +932,8 @@ export type UserUncheckedUpdateWithoutCampusInput = {
   requests?: Prisma.HelpRequestUncheckedUpdateManyWithoutRequesterNestedInput
   helpedRequests?: Prisma.HelpRequestUncheckedUpdateManyWithoutHelperNestedInput
   availability?: Prisma.AvailabilityUncheckedUpdateOneWithoutUserNestedInput
+  ratingsGiven?: Prisma.RatingUncheckedUpdateManyWithoutRaterNestedInput
+  ratingsReceived?: Prisma.RatingUncheckedUpdateManyWithoutRateeNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutCampusInput = {
@@ -742,11 +952,15 @@ export type UserUncheckedUpdateManyWithoutCampusInput = {
 export type UserCountOutputType = {
   requests: number
   helpedRequests: number
+  ratingsGiven: number
+  ratingsReceived: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requests?: boolean | UserCountOutputTypeCountRequestsArgs
   helpedRequests?: boolean | UserCountOutputTypeCountHelpedRequestsArgs
+  ratingsGiven?: boolean | UserCountOutputTypeCountRatingsGivenArgs
+  ratingsReceived?: boolean | UserCountOutputTypeCountRatingsReceivedArgs
 }
 
 /**
@@ -773,6 +987,20 @@ export type UserCountOutputTypeCountHelpedRequestsArgs<ExtArgs extends runtime.T
   where?: Prisma.HelpRequestWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRatingsGivenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RatingWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRatingsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RatingWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -785,6 +1013,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   requests?: boolean | Prisma.User$requestsArgs<ExtArgs>
   helpedRequests?: boolean | Prisma.User$helpedRequestsArgs<ExtArgs>
   availability?: boolean | Prisma.User$availabilityArgs<ExtArgs>
+  ratingsGiven?: boolean | Prisma.User$ratingsGivenArgs<ExtArgs>
+  ratingsReceived?: boolean | Prisma.User$ratingsReceivedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -823,6 +1053,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   requests?: boolean | Prisma.User$requestsArgs<ExtArgs>
   helpedRequests?: boolean | Prisma.User$helpedRequestsArgs<ExtArgs>
   availability?: boolean | Prisma.User$availabilityArgs<ExtArgs>
+  ratingsGiven?: boolean | Prisma.User$ratingsGivenArgs<ExtArgs>
+  ratingsReceived?: boolean | Prisma.User$ratingsReceivedArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -839,6 +1071,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     requests: Prisma.$HelpRequestPayload<ExtArgs>[]
     helpedRequests: Prisma.$HelpRequestPayload<ExtArgs>[]
     availability: Prisma.$AvailabilityPayload<ExtArgs> | null
+    ratingsGiven: Prisma.$RatingPayload<ExtArgs>[]
+    ratingsReceived: Prisma.$RatingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1245,6 +1479,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   requests<T extends Prisma.User$requestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$requestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HelpRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   helpedRequests<T extends Prisma.User$helpedRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$helpedRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HelpRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   availability<T extends Prisma.User$availabilityArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$availabilityArgs<ExtArgs>>): Prisma.Prisma__AvailabilityClient<runtime.Types.Result.GetResult<Prisma.$AvailabilityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ratingsGiven<T extends Prisma.User$ratingsGivenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ratingsGivenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  ratingsReceived<T extends Prisma.User$ratingsReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ratingsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1745,6 +1981,54 @@ export type User$availabilityArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.AvailabilityInclude<ExtArgs> | null
   where?: Prisma.AvailabilityWhereInput
+}
+
+/**
+ * User.ratingsGiven
+ */
+export type User$ratingsGivenArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Rating
+   */
+  select?: Prisma.RatingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Rating
+   */
+  omit?: Prisma.RatingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RatingInclude<ExtArgs> | null
+  where?: Prisma.RatingWhereInput
+  orderBy?: Prisma.RatingOrderByWithRelationInput | Prisma.RatingOrderByWithRelationInput[]
+  cursor?: Prisma.RatingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[]
+}
+
+/**
+ * User.ratingsReceived
+ */
+export type User$ratingsReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Rating
+   */
+  select?: Prisma.RatingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Rating
+   */
+  omit?: Prisma.RatingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RatingInclude<ExtArgs> | null
+  where?: Prisma.RatingWhereInput
+  orderBy?: Prisma.RatingOrderByWithRelationInput | Prisma.RatingOrderByWithRelationInput[]
+  cursor?: Prisma.RatingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[]
 }
 
 /**

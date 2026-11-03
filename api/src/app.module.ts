@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { RequestsModule } from './requests/requests.module';
 import { EventsModule } from './events/events.module';
 import { AvailabilityModule } from './availability/availability.module';
+import { RatingsModule } from './ratings/ratings.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AvailabilityModule } from './availability/availability.module';
     RequestsModule,
     EventsModule,
     AvailabilityModule,
+    RatingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

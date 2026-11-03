@@ -27,6 +27,11 @@ export class RequestsController {
     return this.requests.listOpen(req.user.campusId);
   }
 
+  @Get('mine')
+  mine(@Req() req: any) {
+    return this.requests.listMine(req.user.sub);
+  }
+
   @Post(':id/accept')
   accept(@Req() req: any, @Param('id') id: string) {
     return this.requests.accept(id, req.user.sub, req.user.campusId);

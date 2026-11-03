@@ -54,7 +54,8 @@ export const ModelName = {
   Campus: 'Campus',
   User: 'User',
   Availability: 'Availability',
-  HelpRequest: 'HelpRequest'
+  HelpRequest: 'HelpRequest',
+  Rating: 'Rating'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -127,6 +128,19 @@ export const HelpRequestScalarFieldEnum = {
 } as const
 
 export type HelpRequestScalarFieldEnum = (typeof HelpRequestScalarFieldEnum)[keyof typeof HelpRequestScalarFieldEnum]
+
+
+export const RatingScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  raterId: 'raterId',
+  rateeId: 'rateeId',
+  stars: 'stars',
+  comment: 'comment',
+  createdAt: 'createdAt'
+} as const
+
+export type RatingScalarFieldEnum = (typeof RatingScalarFieldEnum)[keyof typeof RatingScalarFieldEnum]
 
 
 export const SortOrder = {

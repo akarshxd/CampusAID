@@ -18,6 +18,7 @@ type MyTask = OpenRequest & {
   status: string;
   role: 'requester' | 'helper';
   helper: Person | null;
+  rated: boolean;
 };
 
 function errorText(data: any, fallback: string) {
@@ -47,6 +48,8 @@ const STATUS_LABEL: Record<string, string> = {
 export default function Home() {
   const [ready, setReady] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const [mode, setMode] = useState<'login' | 'signup'>('login');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -54,6 +57,12 @@ export default function Home() {
   const [tasks, setTasks] = useState<MyTask[]>([]);
   const [codes, setCodes] = useState<Record<string, string>>({});
   const [entered, setEntered] = useState<Record<string, string>>({});
+  const [stars, setStars] = useState<Record<string, number>>({});
+  const [comments, setComments] = useState<Record<string, string>>({});
+  const [summary, setSummary] = useState<{
+    average: number | null;
+    count: number;
+  } | null>(null);
 
   // Fields of the "new request" form
   const [title, setTitle] = useState('');
@@ -71,11 +80,12 @@ export default function Home() {
     setReady(true);
   }, []);
 
-  // Whenever we have a token, load both lists.
+  // Whenever we have a token, load everything.
   useEffect(() => {
     if (token) {
       loadRequests(token);
       loadMine(token);
+      loadSummary(token);
     }
   }, [token]);
 
@@ -134,18 +144,37 @@ export default function Home() {
     } catch {}
   }
 
-  async function login(e: FormEvent) {
-    e.preventDefault();
-    setMessage('Logging in...');
+  async function loadSummary(t: string) {
     try {
-      const res = await fetch(`${API}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+      const res = await fetch(`${API}/ratings/me`, {
+        headers: { Authorization: `Bearer ${t}` },
       });
       const data = await res.json();
+      if (res.ok) setSummary(data);
+    } catch {}
+  }
+
+  // Handles both "Log in" and "Create account".
+  async function submitAuth(e: FormEvent) {
+    e.preventDefault();
+    const signingUp = mode === 'signup';
+    setMessage(signingUp ? 'Creating your account...' : 'Logging in...');
+    try {
+      const res = await fetch(
+        `${API}/auth/${signingUp ? 'signup' : 'login'}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            signingUp ? { name, email, password } : { email, password },
+          ),
+        },
+      );
+      const data = await res.json();
       if (!res.ok) {
-        setMessage(errorText(data, 'Login failed'));
+        setMessage(
+          errorText(data, signingUp ? 'Could not sign up' : 'Login failed'),
+        );
         return;
       }
       try {
@@ -153,6 +182,7 @@ export default function Home() {
       } catch {}
       setToken(data.accessToken);
       setMessage('');
+      setPassword('');
     } catch {
       setMessage('Cannot reach the server. Is the backend running?');
     }
@@ -254,6 +284,30 @@ export default function Home() {
     loadMine(token);
   }
 
+  async function rate(id: string) {
+    if (!token) return;
+    setMessage('');
+    try {
+      const res = await fetch(`${API}/requests/${id}/rate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          stars: stars[id] ?? 5,
+          comment: comments[id]?.trim() ? comments[id].trim() : undefined,
+        }),
+      });
+      const data = await res.json();
+      setMessage(res.ok ? 'Thanks for rating!' : errorText(data, 'Could not rate'));
+    } catch {
+      setMessage('Cannot reach the server. Is the backend running?');
+    }
+    loadMine(token);
+    loadSummary(token);
+  }
+
   function logout() {
     try {
       localStorage.removeItem('token');
@@ -263,6 +317,9 @@ export default function Home() {
     setTasks([]);
     setCodes({});
     setEntered({});
+    setStars({});
+    setComments({});
+    setSummary(null);
     setMessage('');
   }
 
@@ -282,17 +339,32 @@ export default function Home() {
   if (!ready) return null;
 
   if (!token) {
+    const signingUp = mode === 'signup';
     return (
       <main style={page}>
         <h1>CampusAid</h1>
-        <p>Log in with your college email</p>
+        <p>
+          {signingUp
+            ? 'Create your account with your college email'
+            : 'Log in with your college email'}
+        </p>
         <form
-          onSubmit={login}
+          onSubmit={submitAuth}
           style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
         >
+          {signingUp && (
+            <input
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              minLength={2}
+              style={{ padding: 10, fontSize: 16 }}
+            />
+          )}
           <input
             type="email"
-            placeholder="Email"
+            placeholder="College email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -300,17 +372,32 @@ export default function Home() {
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder={
+              signingUp ? 'Password (at least 8 characters)' : 'Password'
+            }
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            minLength={signingUp ? 8 : undefined}
             style={{ padding: 10, fontSize: 16 }}
           />
           <button type="submit" style={{ padding: 10, fontSize: 16 }}>
-            Log in
+            {signingUp ? 'Create account' : 'Log in'}
           </button>
         </form>
         <p>{message}</p>
+        <button
+          type="button"
+          onClick={() => {
+            setMode(signingUp ? 'login' : 'signup');
+            setMessage('');
+          }}
+          style={{ padding: 8 }}
+        >
+          {signingUp
+            ? 'I already have an account'
+            : 'New here? Create an account'}
+        </button>
       </main>
     );
   }
@@ -324,6 +411,9 @@ export default function Home() {
   );
 
   function renderTask(t: MyTask) {
+    const otherName =
+      t.role === 'requester' ? (t.helper?.name ?? 'them') : t.requester.name;
+
     return (
       <div key={t.id} style={card}>
         <strong>{t.title}</strong>
@@ -398,6 +488,47 @@ export default function Home() {
             </button>
           </div>
         )}
+
+        {t.status === 'COMPLETED' && t.rated && (
+          <p style={{ marginBottom: 0 }}>You rated {otherName}. Thank you!</p>
+        )}
+
+        {t.status === 'COMPLETED' && !t.rated && (
+          <div style={{ marginTop: 8 }}>
+            <div>Rate {otherName}:</div>
+            <select
+              value={stars[t.id] ?? 5}
+              onChange={(e) =>
+                setStars((m) => ({ ...m, [t.id]: Number(e.target.value) }))
+              }
+              style={{ padding: 8, fontSize: 16, marginTop: 6 }}
+            >
+              <option value={5}>5 stars - great</option>
+              <option value={4}>4 stars</option>
+              <option value={3}>3 stars</option>
+              <option value={2}>2 stars</option>
+              <option value={1}>1 star</option>
+            </select>
+            <input
+              placeholder="Optional comment"
+              value={comments[t.id] ?? ''}
+              onChange={(e) =>
+                setComments((m) => ({ ...m, [t.id]: e.target.value }))
+              }
+              maxLength={300}
+              style={{
+                padding: 8,
+                fontSize: 16,
+                width: '100%',
+                marginTop: 8,
+                boxSizing: 'border-box',
+              }}
+            />
+            <button style={btn} onClick={() => rate(t.id)}>
+              Submit rating
+            </button>
+          </div>
+        )}
       </div>
     );
   }
@@ -416,6 +547,13 @@ export default function Home() {
           Log out
         </button>
       </div>
+
+      <p>
+        Your rating:{' '}
+        {summary && summary.count > 0
+          ? `${summary.average} / 5 (${summary.count} ${summary.count === 1 ? 'rating' : 'ratings'})`
+          : 'no ratings yet'}
+      </p>
 
       {message && (
         <p style={{ border: '1px solid #888', padding: 8, borderRadius: 6 }}>

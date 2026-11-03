@@ -323,6 +323,7 @@ export type HelpRequestWhereInput = {
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   helper?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   campus?: Prisma.XOR<Prisma.CampusScalarRelationFilter, Prisma.CampusWhereInput>
+  ratings?: Prisma.RatingListRelationFilter
 }
 
 export type HelpRequestOrderByWithRelationInput = {
@@ -346,6 +347,7 @@ export type HelpRequestOrderByWithRelationInput = {
   requester?: Prisma.UserOrderByWithRelationInput
   helper?: Prisma.UserOrderByWithRelationInput
   campus?: Prisma.CampusOrderByWithRelationInput
+  ratings?: Prisma.RatingOrderByRelationAggregateInput
 }
 
 export type HelpRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -372,6 +374,7 @@ export type HelpRequestWhereUniqueInput = Prisma.AtLeast<{
   requester?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   helper?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   campus?: Prisma.XOR<Prisma.CampusScalarRelationFilter, Prisma.CampusWhereInput>
+  ratings?: Prisma.RatingListRelationFilter
 }, "id">
 
 export type HelpRequestOrderByWithAggregationInput = {
@@ -440,6 +443,7 @@ export type HelpRequestCreateInput = {
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
   helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
   campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestUncheckedCreateInput = {
@@ -460,6 +464,7 @@ export type HelpRequestUncheckedCreateInput = {
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestUpdateInput = {
@@ -480,6 +485,7 @@ export type HelpRequestUpdateInput = {
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
   helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
   campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateInput = {
@@ -500,6 +506,7 @@ export type HelpRequestUncheckedUpdateInput = {
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestCreateManyInput = {
@@ -639,6 +646,11 @@ export type HelpRequestSumOrderByAggregateInput = {
   pickupLat?: Prisma.SortOrder
   pickupLng?: Prisma.SortOrder
   reward?: Prisma.SortOrder
+}
+
+export type HelpRequestScalarRelationFilter = {
+  is?: Prisma.HelpRequestWhereInput
+  isNot?: Prisma.HelpRequestWhereInput
 }
 
 export type HelpRequestCreateNestedManyWithoutCampusInput = {
@@ -787,6 +799,20 @@ export type EnumRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.RequestStatus
 }
 
+export type HelpRequestCreateNestedOneWithoutRatingsInput = {
+  create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutRatingsInput, Prisma.HelpRequestUncheckedCreateWithoutRatingsInput>
+  connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutRatingsInput
+  connect?: Prisma.HelpRequestWhereUniqueInput
+}
+
+export type HelpRequestUpdateOneRequiredWithoutRatingsNestedInput = {
+  create?: Prisma.XOR<Prisma.HelpRequestCreateWithoutRatingsInput, Prisma.HelpRequestUncheckedCreateWithoutRatingsInput>
+  connectOrCreate?: Prisma.HelpRequestCreateOrConnectWithoutRatingsInput
+  upsert?: Prisma.HelpRequestUpsertWithoutRatingsInput
+  connect?: Prisma.HelpRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HelpRequestUpdateToOneWithWhereWithoutRatingsInput, Prisma.HelpRequestUpdateWithoutRatingsInput>, Prisma.HelpRequestUncheckedUpdateWithoutRatingsInput>
+}
+
 export type HelpRequestCreateWithoutCampusInput = {
   id?: string
   title: string
@@ -804,6 +830,7 @@ export type HelpRequestCreateWithoutCampusInput = {
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
   helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestUncheckedCreateWithoutCampusInput = {
@@ -823,6 +850,7 @@ export type HelpRequestUncheckedCreateWithoutCampusInput = {
   handoverCode?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestCreateOrConnectWithoutCampusInput = {
@@ -891,6 +919,7 @@ export type HelpRequestCreateWithoutRequesterInput = {
   updatedAt?: Date | string
   helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
   campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestUncheckedCreateWithoutRequesterInput = {
@@ -910,6 +939,7 @@ export type HelpRequestUncheckedCreateWithoutRequesterInput = {
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestCreateOrConnectWithoutRequesterInput = {
@@ -939,6 +969,7 @@ export type HelpRequestCreateWithoutHelperInput = {
   updatedAt?: Date | string
   requester: Prisma.UserCreateNestedOneWithoutRequestsInput
   campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestUncheckedCreateWithoutHelperInput = {
@@ -958,6 +989,7 @@ export type HelpRequestUncheckedCreateWithoutHelperInput = {
   campusId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutRequestInput
 }
 
 export type HelpRequestCreateOrConnectWithoutHelperInput = {
@@ -1002,6 +1034,102 @@ export type HelpRequestUpdateManyWithWhereWithoutHelperInput = {
   data: Prisma.XOR<Prisma.HelpRequestUpdateManyMutationInput, Prisma.HelpRequestUncheckedUpdateManyWithoutHelperInput>
 }
 
+export type HelpRequestCreateWithoutRatingsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
+  dropoff: string
+  reward: number
+  neededBy?: Date | string | null
+  status?: $Enums.RequestStatus
+  acceptedAt?: Date | string | null
+  handoverCode?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  requester: Prisma.UserCreateNestedOneWithoutRequestsInput
+  helper?: Prisma.UserCreateNestedOneWithoutHelpedRequestsInput
+  campus: Prisma.CampusCreateNestedOneWithoutRequestsInput
+}
+
+export type HelpRequestUncheckedCreateWithoutRatingsInput = {
+  id?: string
+  title: string
+  description?: string | null
+  pickup: string
+  pickupLat?: number | null
+  pickupLng?: number | null
+  dropoff: string
+  reward: number
+  neededBy?: Date | string | null
+  status?: $Enums.RequestStatus
+  requesterId: string
+  helperId?: string | null
+  acceptedAt?: Date | string | null
+  handoverCode?: string | null
+  campusId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type HelpRequestCreateOrConnectWithoutRatingsInput = {
+  where: Prisma.HelpRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.HelpRequestCreateWithoutRatingsInput, Prisma.HelpRequestUncheckedCreateWithoutRatingsInput>
+}
+
+export type HelpRequestUpsertWithoutRatingsInput = {
+  update: Prisma.XOR<Prisma.HelpRequestUpdateWithoutRatingsInput, Prisma.HelpRequestUncheckedUpdateWithoutRatingsInput>
+  create: Prisma.XOR<Prisma.HelpRequestCreateWithoutRatingsInput, Prisma.HelpRequestUncheckedCreateWithoutRatingsInput>
+  where?: Prisma.HelpRequestWhereInput
+}
+
+export type HelpRequestUpdateToOneWithWhereWithoutRatingsInput = {
+  where?: Prisma.HelpRequestWhereInput
+  data: Prisma.XOR<Prisma.HelpRequestUpdateWithoutRatingsInput, Prisma.HelpRequestUncheckedUpdateWithoutRatingsInput>
+}
+
+export type HelpRequestUpdateWithoutRatingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  dropoff?: Prisma.StringFieldUpdateOperationsInput | string
+  reward?: Prisma.IntFieldUpdateOperationsInput | number
+  neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
+  helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
+  campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
+}
+
+export type HelpRequestUncheckedUpdateWithoutRatingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pickup?: Prisma.StringFieldUpdateOperationsInput | string
+  pickupLat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pickupLng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  dropoff?: Prisma.StringFieldUpdateOperationsInput | string
+  reward?: Prisma.IntFieldUpdateOperationsInput | number
+  neededBy?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.EnumRequestStatusFieldUpdateOperationsInput | $Enums.RequestStatus
+  requesterId?: Prisma.StringFieldUpdateOperationsInput | string
+  helperId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  acceptedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  campusId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type HelpRequestCreateManyCampusInput = {
   id?: string
   title: string
@@ -1038,6 +1166,7 @@ export type HelpRequestUpdateWithoutCampusInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
   helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateWithoutCampusInput = {
@@ -1057,6 +1186,7 @@ export type HelpRequestUncheckedUpdateWithoutCampusInput = {
   handoverCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateManyWithoutCampusInput = {
@@ -1133,6 +1263,7 @@ export type HelpRequestUpdateWithoutRequesterInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   helper?: Prisma.UserUpdateOneWithoutHelpedRequestsNestedInput
   campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateWithoutRequesterInput = {
@@ -1152,6 +1283,7 @@ export type HelpRequestUncheckedUpdateWithoutRequesterInput = {
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateManyWithoutRequesterInput = {
@@ -1190,6 +1322,7 @@ export type HelpRequestUpdateWithoutHelperInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   requester?: Prisma.UserUpdateOneRequiredWithoutRequestsNestedInput
   campus?: Prisma.CampusUpdateOneRequiredWithoutRequestsNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateWithoutHelperInput = {
@@ -1209,6 +1342,7 @@ export type HelpRequestUncheckedUpdateWithoutHelperInput = {
   campusId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutRequestNestedInput
 }
 
 export type HelpRequestUncheckedUpdateManyWithoutHelperInput = {
@@ -1230,6 +1364,35 @@ export type HelpRequestUncheckedUpdateManyWithoutHelperInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type HelpRequestCountOutputType
+ */
+
+export type HelpRequestCountOutputType = {
+  ratings: number
+}
+
+export type HelpRequestCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  ratings?: boolean | HelpRequestCountOutputTypeCountRatingsArgs
+}
+
+/**
+ * HelpRequestCountOutputType without action
+ */
+export type HelpRequestCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HelpRequestCountOutputType
+   */
+  select?: Prisma.HelpRequestCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * HelpRequestCountOutputType without action
+ */
+export type HelpRequestCountOutputTypeCountRatingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RatingWhereInput
+}
 
 
 export type HelpRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1253,6 +1416,8 @@ export type HelpRequestSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
+  ratings?: boolean | Prisma.HelpRequest$ratingsArgs<ExtArgs>
+  _count?: boolean | Prisma.HelpRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["helpRequest"]>
 
 export type HelpRequestSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1326,6 +1491,8 @@ export type HelpRequestInclude<ExtArgs extends runtime.Types.Extensions.Internal
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   helper?: boolean | Prisma.HelpRequest$helperArgs<ExtArgs>
   campus?: boolean | Prisma.CampusDefaultArgs<ExtArgs>
+  ratings?: boolean | Prisma.HelpRequest$ratingsArgs<ExtArgs>
+  _count?: boolean | Prisma.HelpRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HelpRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   requester?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1344,6 +1511,7 @@ export type $HelpRequestPayload<ExtArgs extends runtime.Types.Extensions.Interna
     requester: Prisma.$UserPayload<ExtArgs>
     helper: Prisma.$UserPayload<ExtArgs> | null
     campus: Prisma.$CampusPayload<ExtArgs>
+    ratings: Prisma.$RatingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1760,6 +1928,7 @@ export interface Prisma__HelpRequestClient<T, Null = never, ExtArgs extends runt
   requester<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   helper<T extends Prisma.HelpRequest$helperArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HelpRequest$helperArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   campus<T extends Prisma.CampusDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CampusDefaultArgs<ExtArgs>>): Prisma.Prisma__CampusClient<runtime.Types.Result.GetResult<Prisma.$CampusPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  ratings<T extends Prisma.HelpRequest$ratingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HelpRequest$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2223,6 +2392,30 @@ export type HelpRequest$helperArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * HelpRequest.ratings
+ */
+export type HelpRequest$ratingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Rating
+   */
+  select?: Prisma.RatingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Rating
+   */
+  omit?: Prisma.RatingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RatingInclude<ExtArgs> | null
+  where?: Prisma.RatingWhereInput
+  orderBy?: Prisma.RatingOrderByWithRelationInput | Prisma.RatingOrderByWithRelationInput[]
+  cursor?: Prisma.RatingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[]
 }
 
 /**

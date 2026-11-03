@@ -37,3 +37,8 @@ export type Availability = Prisma.AvailabilityModel
  * 
  */
 export type HelpRequest = Prisma.HelpRequestModel
+/**
+ * Model Rating
+ * 
+ */
+export type Rating = Prisma.RatingModel

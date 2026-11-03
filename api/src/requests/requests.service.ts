@@ -257,4 +257,23 @@ export class RequestsService {
     throw new ConflictException('You can only back out before starting the task');
   }
 
+    async listMine(userId: string) {
+    const rows = await this.prisma.helpRequest.findMany({
+      where: { OR: [{ requesterId: userId }, { helperId: userId }] },
+      orderBy: { updatedAt: 'desc' },
+      take: 50,
+      include: {
+        requester: { select: { id: true, name: true } },
+        helper: { select: { id: true, name: true } },
+        ratings: { where: { raterId: userId }, select: { id: true } },
+      },
+      omit: { handoverCode: true },
+    });
+    return rows.map(({ ratings, ...r }) => ({
+      ...r,
+      role: r.requesterId === userId ? 'requester' : 'helper',
+      rated: ratings.length > 0,
+    }));
+  }
+
 }
